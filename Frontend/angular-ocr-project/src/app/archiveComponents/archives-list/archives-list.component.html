@@ -1,0 +1,245 @@
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Documents Table List</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Documents</a></li>
+                        </ol>
+                    </nav>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+
+        <div class="col" *ngIf="!archiveChecker">
+            <div class="card card-calendar">
+                <div class="card-header">
+                    <div class="col-6">
+                        <h3 class="mb-0"> Archive</h3>
+                        <ng-template #mymodal let-modal>
+                            
+                                <div class="card">
+                                    <div class="card-header">
+                                        <button type="button" class="close" aria-label="Close"
+                                        (click)="modal.dismiss('Cross click')">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                        <h3 class="mb-0">Add new Folder</h3>
+                                       
+                                    </div>
+                                    <div class="card-body">
+                                        <form [formGroup]="ArchiveForm" (ngSubmit)="onCreate()">
+                                            <div class="form-group"><label class="form-control-label"
+                                                    for="exampleFormControlInput1">Name</label> <input
+                                                    type="text" class="form-control" 
+                                                    formControlName="name"
+                                                    placeholder="folder name ... "></div>
+                                            <div class="form-group"><label class="form-control-label"
+                                                    for="exampleFormControlSelect1"
+                                                    
+                                                    >Type</label> <select
+                                                    formControlName="type"
+                                                    class="form-control" id="exampleFormControlSelect1">
+                                                    <option>MIXED</option>
+                                                    <option>VITALE</option>
+                                                    <option>PASSPORT</option>
+                                                  
+                                                </select></div>
+                                        
+                                            <div class="form-group"><label class="form-control-label"
+                                                    
+                                                    for="exampleFormControlTextarea1">Desciption</label> <textarea
+                                                    formControlName="description"
+                                                    class="form-control" id="exampleFormControlTextarea1"
+                                                    rows="3"></textarea></div>
+                                                    <div><button class="btn btn-success" type="submit">Create Folder</button></div>
+                                                    
+                                        </form>
+                                    </div>
+                                </div>
+                        </ng-template>
+                    </div>
+                    <div class="col-12 text-right"><a (click)="open(mymodal)" class="btn btn-sm btn-primary btn-round btn-icon"
+                            data-toggle="tooltip" data-original-title="Edit product"><span class="btn-inner--icon"
+                                style="color:white !important;"><i class="fas fa-user-edit"></i></span> <span
+                                class="btn-inner--text" style="color:white !important; ">New Folder</span></a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+                    <div class="row">
+
+                        <div  class="card bg-gradient-primary" style="margin-left: 30px ; width: 200px !important;" *ngFor="let arc of archives">
+                            <div  class="card-body" style="cursor: pointer;" (click)="showDetails(arc.id)"
+                                (dblclick)="onShow($event,arc.id)">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">{{arc.type}}
+                                        </h5><span class="h2 font-weight-bold mb-0 text-white">{{arc.name}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-dark rounded-circle shadow"><i
+                                                class="ni ni-folder-17"></i></div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm"><span class="text-white mr-2"><i
+                                            class="ni ni-single-copy-04"></i> {{arc.filesNumber}}</span> <span
+                                        class="text-nowrap text-light">document(s)</span></p>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-8 order-xl-1" *ngIf="archiveChecker">
+            <div class="card card-calendar">
+                <div class="card-header">
+                    <h5 class="h3 mb-0">Archive</h5>
+                    <div class="col-12 text-right"><a (click)="open(mymodal)" class="btn btn-sm btn-primary btn-round btn-icon"
+                        data-toggle="tooltip" data-original-title="Edit product"><span class="btn-inner--icon"
+                            style="color:white !important;"><i class="fas fa-user-edit"></i></span> <span
+                            class="btn-inner--text" style="color:white !important; ">New Folder</span></a>
+
+
+
+                </div>
+
+                </div>
+                  <ng-template #mymodal let-modal>
+                            
+                                <div class="card">
+                                    <div class="card-header">
+                                        <button type="button" class="close" aria-label="Close"
+                                        (click)="modal.dismiss('Cross click')">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                        <h3 class="mb-0">Add new Folder</h3>
+                                       
+                                    </div>
+                                    <div class="card-body">
+                                        <form [formGroup]="ArchiveForm" (ngSubmit)="onCreate()">
+                                            <div class="form-group"><label class="form-control-label"
+                                                    for="exampleFormControlInput1">Name</label> <input
+                                                    type="text" class="form-control" 
+                                                    formControlName="name"
+                                                    placeholder="folder name ... "></div>
+                                            <div class="form-group"><label class="form-control-label"
+                                                    for="exampleFormControlSelect1"
+                                                    
+                                                    >Type</label> <select
+                                                    formControlName="type"
+                                                    class="form-control" id="exampleFormControlSelect1">
+                                                    <option>MIXED</option>
+                                                    <option>VITALE</option>
+                                                    <option>PASSPORT</option>
+                                                  
+                                                </select></div>
+                                        
+                                            <div class="form-group"><label class="form-control-label"
+                                                    
+                                                    for="exampleFormControlTextarea1">Desciption</label> <textarea
+                                                    formControlName="description"
+                                                    class="form-control" id="exampleFormControlTextarea1"
+                                                    rows="3"></textarea></div>
+                                                    <div><button class="btn btn-success" type="submit">Create Folder</button></div>
+                                                    
+                                        </form>
+                                    </div>
+                                </div>
+                        </ng-template>
+
+                <div class="card-body p-0">
+                    <div class="row">
+
+                        <div class="card bg-gradient-primary" style="margin-left: 30px ; width: 200px !important;"  *ngFor="let arc of archives">
+                            <div class="card-body" style="cursor: pointer;" (click)="showDetails(arc.id)"
+                                (dblclick)="onShow($event,arc.id)">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">
+                                            {{arc.type}}
+                                        </h5><span class="h2 font-weight-bold mb-0 text-white">{{arc.name}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-dark rounded-circle shadow"><i
+                                                class="ni ni-folder-17"></i></div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm"><span class="text-white mr-2"><i
+                                            class="ni ni-single-copy-04"></i> {{arc.filesNumber}}</span> <span
+                                        class="text-nowrap text-light">document(s)</span></p>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-4 order-xl-2" *ngIf="archiveChecker">
+            <div class="card card-profile">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image"><a href="#"></a></div>
+                    </div>
+                </div>
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="d-flex justify-content-between"><a style="color: white !important;"
+                            (click)="onShow($event,archive.id)" class="btn btn-sm btn-info mr-4">
+                            <i class="ni ni-folder-17"></i></a>
+                        <a (click)="archiveChecker = false" style="color: white !important ;"
+                            class="btn btn-sm btn-danger float-right">X</a>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center">
+                                <div><span class="heading">{{archive.filesNumber}}</span> <span
+                                        class="description">Documents</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5 class="h3">{{archive.name}}</h5>
+                        <div class="h5 font-weight-300"><i class="ni location_pin mr-2"></i>{{archive.type}}</div>
+                        <div class="h5 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{archive.description}}
+                        </div>
+                        <div><i class="ni education_hat mr-2"></i>{{archive.creation_date | date}}</div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm"
+                            (click)="OnDelete(archive.id)">delete</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

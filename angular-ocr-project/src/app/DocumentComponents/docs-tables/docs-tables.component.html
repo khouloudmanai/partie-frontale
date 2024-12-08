@@ -1,0 +1,396 @@
+<style>
+    .paginator{
+        font-family: 'Lato', sans-serif;
+        font-size: 15px;
+    }
+    
+    .paginator ::ng-deep .ngx-pagination .current {
+        background: #0648b3;
+        border-radius: 4px;
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+    
+    .paginator ::ng-deep .ngx-pagination a:hover, .ngx-pagination button:hover {
+        background: #d4d4d4;
+        border-radius: 3px;
+        padding-left: 9px;
+        padding-right: 9px;
+        text-decoration: none;
+    }
+    
+    .paginator ::ng-deep .ngx-pagination a:focus, .ngx-pagination button:focus {
+        outline: none;
+        background: #d4d4d4;
+
+    
+    }
+
+    .ngx-pagination {
+        margin-left: 0 !important;
+        margin-bottom: 1rem !important;
+        line-height: 20px !important;
+        padding: 7px 15px 7px !important;
+        font-size: 12px !important;
+      }
+      .ngx-pagination::before,
+      .ngx-pagination::after {
+        content: " " !important;
+        display: table !important;
+      }
+      
+      .ngx-pagination::after {
+        clear: both !important;
+      }
+      
+      .ngx-pagination li {
+        -moz-user-select: none !important;
+        -webkit-user-select: none !important;
+        -ms-user-select: none !important;
+        margin-right: 0.2rem !important;
+        border-radius: 0 !important;
+      }
+      
+      .ngx-pagination li {
+        display: inline-block !important;
+      }
+      
+      .ngx-pagination a,
+      .ngx-pagination button {
+        color: #0a0a0a !important;
+        display: block !important;
+        background-color: rgb(248, 248, 248) !important;
+        color: black !important;
+        border: 2px solid #8b8b8b !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 9% !important;
+      }
+      
+      .ngx-pagination a:hover,
+      .ngx-pagination button:hover {
+        background: #788b8d88 !important;
+      }
+      
+      .ngx-pagination .current {
+        padding: 0.1875rem 0.625rem !important;
+        background: #2199e8 !important;
+        color: #fefefe !important;
+        cursor: default !important;
+        border: 2px solid #8b8b8b !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 9% !important;
+      }
+      
+      .ngx-pagination .disabled {
+        padding: 0.1875rem 0.625rem !important;
+        color: #cacaca00 !important;
+        cursor: default !important;
+      }
+      
+      .ngx-pagination .disabled:hover {
+        background: transparent !important;
+      }
+      
+      .ngx-pagination a,
+      .ngx-pagination button {
+        cursor: pointer !important;
+      }
+      
+      .ngx-pagination .pagination-previous a::before,
+      .ngx-pagination .pagination-previous.disabled::before {
+        font-family: FontAwesome;
+        content: "\f053" !important;
+        display: inline-block !important;
+        margin-right: 0rem !important;
+      }
+      
+      .ngx-pagination .pagination-next a::after,
+      .ngx-pagination .pagination-next.disabled::after {
+        font-family: FontAwesome !important;
+        content: "\f054" !important;
+        display: inline-block !important;
+        margin-left: 0rem !important;
+      }
+      
+      .ngx-pagination .show-for-sr {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+      }
+      
+      .ngx-pagination .small-screen {
+        display: none !important;
+      }
+      
+      @media screen and (max-width: 601px) {
+        .ngx-pagination.responsive .small-screen {
+          display: inline-block !important;
+          color: black !important;
+          background-color: rgb(248, 248, 248) !important;
+          border: 2px solid #8b8b8b !important;
+          padding: 0.5rem 1rem !important;
+          border-radius: 9% !important;
+        }
+        .ngx-pagination.responsive
+          li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+          display: none !important;
+        }
+      }
+    
+</style>
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Documents Table List</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Documents</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right"><a style="cursor: pointer;"  routerLinkActive="active" [routerLink]="['../createDoc']" class="btn btn-sm btn-neutral">New</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--6">
+
+
+    <div class="card" *ngIf="!darkmode">
+        <div class="card-header border-0">
+            <div class="row">
+                
+                <div class="col-6">
+                    <h3 class="mb-0">{{tableType}} table</h3>
+                        
+                        <input type="radio" name = ".." value=".." (change)="tableTypeC('PASSPORT')" checked><label>PASSPORT</label>
+                        <span style="  padding: 0.35em;"></span>
+                        <input type="radio" name = ".." value=".." (change)="tableTypeC('VITALE')"> <label>VITALE</label> 
+                   
+                </div>
+                <div class="col-6 text-right"><a (click)="showdata()" class="btn btn-sm btn-primary btn-round btn-icon" data-toggle="tooltip" data-original-title="Edit product"><span class="btn-inner--icon" style="color:white !important;"><i class="fas fa-user-edit"></i></span> <span class="btn-inner--text" style="color:white !important; ">Show Data</span></a>
+
+               
+
+            </div>
+        </div>
+        <div class="table-responsive">
+        
+            <div class="d-flex justify-content-between">
+                
+              <div class=" col-sm-6 col-md-3">
+               
+                  <input class="form-control" placeholder="Search" type="text" [(ngModel)]="term">
+              </div>
+              
+            
+              <div class="form-group">
+                <button class="btn btn-outline-danger" *ngIf="tableType=='PASSPORT'" [useExistingCss]="true" printTitle="{{tableType}} Table" printSectionId="print-passport" ngxPrint>
+                    Print
+                  </button>
+                  <button class="btn btn-outline-danger" *ngIf="tableType=='VITALE'" [useExistingCss]="true" printTitle="{{tableType}} Table" printSectionId="print-vitale"  ngxPrint>
+                    Print
+                  </button>
+                  <button class="btn btn-outline-danger" *ngIf="tableType=='PASSPORT'" [useExistingCss]="true" printTitle="{{tableType}} Table" printSectionId="print-passport-all" ngxPrint>
+                    Print All
+                  </button>
+                  <button class="btn btn-outline-danger" *ngIf="tableType=='VITALE'" [useExistingCss]="true" printTitle="{{tableType}} Table" printSectionId="print-vitale-all"  ngxPrint>
+                    Print All
+                  </button>
+                  <button *ngIf="tableType=='PASSPORT'" class="btn btn-outline-primary" (click)="onCSVPassport()" >
+                    CSV Download
+                  </button>
+                  <button *ngIf="tableType=='VITALE'" class="btn btn-outline-primary" (click)="onCSVVitale()" >
+                    CSV Download
+                  </button>
+                  <button *ngIf="tableType=='PASSPORT'" type="button" class="btn btn-outline-success" (click)="exportExcelP()">
+                    Export
+                  </button>
+                  <button *ngIf="tableType=='VITALE'" type="button" class="btn btn-outline-success" (click)="exportExcelV()">
+                    Export
+                  </button>
+                </div>
+            </div>
+            <div id="print-passport">
+            <table  class="table align-items-center table-flush table-striped"  *ngIf="tableType=='PASSPORT'">
+                <thead class="thead-light">
+                
+                    <tr>
+                        
+                        <th>title</th>
+                        <th>Description</th>
+                        <th>Creation date</th>
+                        <th *ngIf="show_data">First Name</th>
+                        <th *ngIf="show_data">Last Name</th>
+                        <th *ngIf="show_data">Nationality</th>
+                        <th *ngIf="show_data">Date of Birth</th>
+                        <th *ngIf="show_data">Expiration Date</th>
+                        <th *ngIf="show_data">Sex</th>
+                        <th *ngIf="show_data">Type</th>
+                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    
+                    <tr *ngFor="let item of docs | searchFilter: tableType | filter:term | paginate: { itemsPerPage: 7, currentPage: p }">
+                        <ng-template [ngIf]="item.modelType =='PASSPORT'">
+                        <td class="table-user"><a style="cursor: pointer;"  routerLinkActive="active" [routerLink]="['../showDoc', item.id]"><img src="http://127.0.0.1:8000/media/{{item.file}}" class="avatar rounded-circle mr-3"> <b>{{item.title}}</b></a></td>
+                        <td><span class="text-muted">{{item.description}}</span></td>
+                        <td>{{item.creationDate | date}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.surname}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.names}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.nationality}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.date_of_birth}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.expiration_date}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.sex}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.type}}</td>
+                        <td class="table-actions"><a style="cursor: pointer;" routerLinkActive="active"
+                            [routerLink]="['../editDoc',item.id]" class="table-action" data-toggle="tooltip" data-original-title="Edit Document"><i class="fas fa-user-edit" style="color:rgb(12, 138, 68) ;"></i> </a><a (click)="OnDelete(item.id)" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product"><i class="fas fa-trash" style="color:rgb(230, 65, 65) ;"></i></a></td>
+                    </ng-template>
+                    </tr>
+                </tbody>
+                <div class="card-footer py-4"><nav aria-label="...">
+                    <pagination-controls (pageChange)="p = $event" class="ngx-pagination paginator pagination justify-content-end mb-0"></pagination-controls>
+                </nav></div>
+            </table>
+        </div>
+
+
+        <div id="print-passport-all" style="display: none;">
+            <table  class="table align-items-center table-flush table-striped"  *ngIf="tableType=='PASSPORT'">
+                <thead class="thead-light">
+                
+                    <tr>
+                        
+                        <th>title</th>
+                        <th>Description</th>
+                        <th>Creation date</th>
+                        <th *ngIf="show_data">First Name</th>
+                        <th *ngIf="show_data">Last Name</th>
+                        <th *ngIf="show_data">Nationality</th>
+                        <th *ngIf="show_data">Date of Birth</th>
+                        <th *ngIf="show_data">Expiration Date</th>
+                        <th *ngIf="show_data">Sex</th>
+                        <th *ngIf="show_data">Type</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    
+                    <tr *ngFor="let item of docs | searchFilter: tableType">
+                        <ng-template [ngIf]="item.modelType =='PASSPORT'">
+                        <td class="table-user"><a style="cursor: pointer;"  routerLinkActive="active" [routerLink]="['../showDoc', item.id]"><img src="http://127.0.0.1:8000/media/{{item.file}}" class="avatar rounded-circle mr-3"> <b>{{item.title}}</b></a></td>
+                        <td><span class="text-muted">{{item.description}}</span></td>
+                        <td>{{item.creationDate | date}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.surname}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.names}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.nationality}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.date_of_birth}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.expiration_date}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.sex}}</td>
+                        <td *ngIf="show_data ">{{item.dataP.type}}</td>
+                        
+                    </ng-template>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+
+        <div id="print-vitale" >
+            <table class="table align-items-center table-flush table-striped" id="print-section"  *ngIf="tableType=='VITALE'">
+                <thead class="thead-light">
+                
+                    <tr>
+                        
+                        <th>title</th>
+                        <th>Description</th>
+                        <th>Creation date</th>
+                        <th *ngIf="show_data">Full Name</th>
+                        <th *ngIf="show_data">Emise Date</th>
+                        <th *ngIf="show_data">Gender</th>
+                        <th *ngIf="show_data">Date of Birth</th>
+                        <th *ngIf="show_data">Security Key</th>
+                  
+                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr *ngFor="let item of docs | searchFilter: tableType  | filter:term | paginate: { itemsPerPage: 7, currentPage: p }">
+                        <ng-template [ngIf]="item.modelType =='VITALE'">
+                        <td class="table-user"><img src="http://127.0.0.1:8000/media/{{item.file}}" class="avatar rounded-circle mr-3"> <b>{{item.title}}</b></td>
+                        <td><span class="text-muted">{{item.description}}</span></td>
+                        <td><a href="#!" class="font-weight-bold">{{item.creationDate | date}}</a></td>
+                        <td *ngIf="show_data ">{{item.dataV.full_name}}</td>
+                        <td *ngIf="show_data ">{{item.dataV.emise_date}}</td>
+                        <td *ngIf="show_data ">{{item.dataV.gender}}</td>
+                        <td *ngIf="show_data ">{{item.dataV.date_of_birth}}</td>
+                        <td *ngIf="show_data ">{{item.dataV.cle_de_securite}}</td>
+                  
+                        <td class="table-actions"><a style="cursor: pointer;" routerLinkActive="active"
+                            [routerLink]="['../editDoc',item.id]" class="table-action" data-toggle="tooltip" data-original-title="Edit Document"><i class="fas fa-user-edit" style="color:rgb(12, 138, 68) ;"></i> </a><a (click)="OnDelete(item.id)" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product"><i class="fas fa-trash" style="color:rgb(230, 65, 65) ;"></i></a></td>
+                    </ng-template>
+                    </tr>
+                    
+                </tbody>
+                <div class="card-footer py-4"><nav aria-label="...">
+                    <pagination-controls (pageChange)="p = $event" class="ngx-pagination paginator pagination justify-content-end mb-0"></pagination-controls>
+                </nav></div>
+            </table>
+            </div>
+
+            <div id="print-vitale-all" style="display: none;">
+                <table class="table align-items-center table-flush table-striped" id="print-section"  *ngIf="tableType=='VITALE'">
+                    <thead class="thead-light">
+                    
+                        <tr>
+                            
+                            <th>title</th>
+                            <th>Description</th>
+                            <th>Creation date</th>
+                            <th >Full Name</th>
+                            <th >Emise Date</th>
+                            <th >Gender</th>
+                            <th >Date of Birth</th>
+                            <th >Security Key</th>
+                      
+                            
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr *ngFor="let item of docs | searchFilter: tableType">
+                            <ng-template [ngIf]="item.modelType =='VITALE'">
+                            <td class="table-user"><img src="http://127.0.0.1:8000/media/{{item.file}}" class="avatar rounded-circle mr-3"> <b>{{item.title}}</b></td>
+                            <td><span class="text-muted">{{item.description}}</span></td>
+                            <td><a href="#!" class="font-weight-bold">{{item.creationDate | date}}</a></td>
+                            <td >{{item.dataV.full_name}}</td>
+                            <td >{{item.dataV.emise_date}}</td>
+                            <td >{{item.dataV.gender}}</td>
+                            <td >{{item.dataV.date_of_birth}}</td>
+                            <td >{{item.dataV.cle_de_securite}}</td>
+                      
+                            
+                        </ng-template>
+                        </tr>
+                        
+                    </tbody>
+        
+                </table>
+                </div>
+            
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,339 @@
+
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">Extract New Document</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a style="cursor: pointer;"  routerLinkActive="active" [routerLink]="['../main']" ><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a style="cursor: pointer;"  routerLinkActive="active" [routerLink]="['../listDocs']" >Documents</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">New Document</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt--6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Form group in grid</h3>
+                </div>
+                <div class="card-body">
+                
+                    <form [formGroup]="createForm" class="form-row">     
+
+                        <div class="form-group col-md-4 mb-3" >
+
+                            <select 
+                            [(ngModel)]="selectedValue" 
+                            class="form-control" 
+                            id="modelType"
+                            name="modelType"
+                            formControlName="modelType">
+                                <option value="Select the Document Type" disabled selected>Select the Document Type</option>
+                                <option *ngFor="let c of modelTypes" [ngValue]="c">{{c}}</option>
+                            </select>
+                            
+                            <div
+                            *ngIf="!createForm.get('modelType')?.valid && (createForm.get('modelType')?.dirty ||createForm.get('modelType')?.touched)">
+                                    <div [hidden]="!createForm.get('modelType').errors?.['required']">
+                                    type is required
+                                    </div>
+                                    <div [hidden]="createForm.get('modelType').value!='Select the Document Type'">
+                                        type is required
+                                        </div>
+                                <div [hidden]="!createForm.get('modelType').errors?.['minlength']">
+                                    Min Length is 3
+                                </div>
+                                    </div>
+                            </div>
+                        <div class="form-group col-md-4">
+                            <input 
+                            placeholder="Title"
+                            type="text"
+                            id="title"
+                            name="title"
+                            formControlName="title"
+                            class="form-control"
+                            >
+                            <div
+                    *ngIf="!createForm.get('title')?.valid && (createForm.get('title')?.dirty ||createForm.get('title')?.touched)">
+                            <div style="color: red !important;" [hidden]="!createForm.get('title').errors?.['required']">
+                            Title is required
+                            </div>
+                        <div style="color: red !important;" [hidden]="!createForm.get('title').errors?.['minlength']">
+                            Min Length is 3
+                        </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input 
+                            placeholder="Description"
+                            type="text"
+                            id="description"
+                            name="description"
+                            formControlName="description"
+                            class="form-control"
+                            >
+                            <div
+                    *ngIf="!createForm.get('description')?.valid && (createForm.get('description')?.dirty ||createForm.get('description')?.touched)">
+                        <div style="color: red !important;" [hidden]="!createForm.get('description').errors?.['minlength']">
+                            Min Length is 10
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4 mb-3"  >
+                            <input placeholder="Document Image" type="file" class="form-control form-control-lg"  name="docImage" id="docImage" formControlName="docImage" (change)="selectFile($event)" (change)="imagePreview($event)" 
+                            #fileUpload [hidden]="true">  
+                                  
+                            </div>
+                        
+
+                        
+                        <div class="form-group">
+                            <input 
+                            type="hidden"
+                            id="owner"
+                            name="owner"
+                            formControlName="owner"
+                            value="{{user.user_id}}"
+                            class="form-control"
+                            >
+                        
+                                
+                            <div
+                            *ngIf="!createForm.get('title')?.valid && (createForm.get('owner')?.dirty ||createForm.get('owner')?.touched)">
+                                <div [hidden]="!createForm.get('owner').errors?.['required']">
+                                    First Name is required
+                                </div>
+                                </div>
+                        </div>
+
+                        <button class="btn btn-success" (click)="OnExtract()"  [disabled]="!createForm.valid"> Extract the Document</button>
+
+                        
+                    </form>
+                </div>
+            
+                </div>
+            
+            <div class="row">
+                
+                <div class="col-lg-7">
+
+                    <div class="card-wrapper">
+                       
+                        <div class="card" *ngIf="pass">
+                            <div class="card-header">
+                                <h3 class="mb-0">Passport Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">First Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" value="{{pass.names}}" formControlName="names" required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Last Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" value="{{pass.surname}}" formControlName="surname" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Nationality</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="nationality" value="{{pass.nationality}}" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Type</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" value="{{pass.type}}" formControlName="type"  id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Sex</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" value="{{pass.sex}}" formControlName="sex"  id="example-tel-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-password-input" class="col-md-4 col-form-label form-control-label">Date of Birth</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="date_of_birth" value="{{pass.date_of_birth}}" id="example-password-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-number-input" class="col-md-4 col-form-label form-control-label">Expiration Date</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="expiration_date" value="{{pass.expiration_date}}"  id="example-number-input"></div>
+                                    </div>
+                                  
+                                    <button class="btn btn-success" type="submit">Verify Data</button>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="!pass && selectedValue=='PASSPORT'">
+                            <div class="card-header">
+                                <h3 class="mb-0">Passport Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">First Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="names" required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Last Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="surname" required="" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Nationality</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="nationality"  required="" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Type</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="type"  required="" id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Sex</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="sex"  required="" id="example-tel-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-password-input" class="col-md-4 col-form-label form-control-label">Date of Birth</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="date_of_birth"  required="" id="example-password-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-number-input" class="col-md-4 col-form-label form-control-label">Expiration Date</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="expiration_date"   required="" id="example-number-input"></div>
+                                    </div>
+                                  
+            
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="receipt">
+                            <div class="card-header">
+                                <h3 class="mb-0">Receipt Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyReceiptForm" (ngSubmit)="onVerifyReceipt()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">Merchant Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Merchant_Name"  required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Merchant Address</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Merchant_Address"  required="" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Merchant Phone</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Merchant_Phone"  required="" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Receipt Number</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Receipt_Number"   required="" id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Total Amount</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Total_Amount"   required="" id="example-tel-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-password-input" class="col-md-4 col-form-label form-control-label">Tax Amount</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Tax_Amount"  required="" id="example-password-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-number-input" class="col-md-6 col-form-label form-control-label">Product List</label>
+                                        <div class="col-md-9"><textarea class="form-control" id="example-number-input" formControlName="productList" required="" ></textarea>
+                                               </div>                                    </div>
+                                  
+                                    <button class="btn btn-success" type="submit">Verify Data</button>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="!receipt && selectedValue=='RECEIPT'">
+                            <div class="card-header">
+                                <h3 class="mb-0">Receipt Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyReceiptForm" (ngSubmit)="onVerifyReceipt()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">Merchant Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Merchant_Name" required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Merchant Address</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Merchant_Address" required="" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Merchant Phone</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Merchant_Phone"  required="" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Receipt Number</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Receipt_Number"  required="" id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Total Amount</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="Total_Amount"  required="" id="example-tel-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-password-input" class="col-md-4 col-form-label form-control-label">Tax Amount</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="Tax_Amount"  required="" id="example-password-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-number-input" class="col-md-4 col-form-label form-control-label">Product List</label>
+                                        <div class="col-md-7"><textarea  class="form-control" id="example-number-input" formControlName="productList" required="" ></textarea>
+                                               </div>                                    </div>
+                                  
+            
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="vitale">
+                            <div class="card-header">
+                                <h3 class="mb-0">Vital Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyVitaleForm" (ngSubmit)="onVerifyVitale()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">Full Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  value="{{vitale.full_name}}" formControlName="full_name" required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Emise Date</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  value="{{vitale.emise_date}}" formControlName="emise_date" required="" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Gender</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="gender" value="{{vitale.gender}}"  required="" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Security Key</label>
+                                        <div class="col-md-7"><input class="form-control" type="number" value="{{vitale.cle_de_securite}}" formControlName="cle_de_securite" required="" id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Date of Birth<</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="date_of_birth" value="{{vitale.date_of_birth}}"  required="" id="example-tel-input"></div>
+                                    </div>
+                                 
+                                    <button class="btn btn-success" type="submit">Verify Data</button>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="!vitale && selectedValue=='VITALE'">
+                            <div class="card-header">
+                                <h3 class="mb-0">Vital Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation was-validated"  [formGroup]="verifyVitaleForm" (ngSubmit)="onVerifyVitale()">
+                                    <div class="form-group row"><label for="example-text-input" class="col-md-4 col-form-label form-control-label">Full Name</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"   formControlName="full_name" required="" id="example-text-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-search-input" class="col-md-4 col-form-label form-control-label">Emise Date</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"   formControlName="emise_date" required="" id="example-search-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-email-input" class="col-md-4 col-form-label form-control-label">Gender</label>
+                                        <div class="col-md-7"><input class="form-control" type="text" formControlName="gender"  required="" id="example-email-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-url-input" class="col-md-4 col-form-label form-control-label">Security Key</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="cle_de_securite" required="" id="example-url-input"></div>
+                                    </div>
+                                    <div class="form-group row"><label for="example-tel-input" class="col-md-4 col-form-label form-control-label">Date of Birth</label>
+                                        <div class="col-md-7"><input class="form-control" type="text"  formControlName="date_of_birth"  required="" id="example-tel-input" ></div>
+                                    </div>
+                                  
+                                  
+                                    
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-5">
+                    <div class="card-wrapper">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="mb-0">The Document</h3>
+                            </div>
+                            <a (click)="fileUpload.click()">
+                            <div class="card-body" style="border: 3px solid #0648b3 !important ; border-radius:20px !important;">
+                                
+                                <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                                <div><img [src]="url" *ngIf="url" ></div>
+                           
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

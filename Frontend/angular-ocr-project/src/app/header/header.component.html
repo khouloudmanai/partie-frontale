@@ -1,0 +1,76 @@
+<header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-light navbar-theme-primary"
+      style="background-color: #0648b3; height: 80px;">
+      <a routerLinkActive="active" [routerLink]="['']" style="cursor: pointer;">
+        <img src="../../../assets/front/assets/img/brand/pixocr logo.png" style="height: 80px;" width="170" alt="logo">
+      </a>
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_global"
+          aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar_global">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a routerLinkActive="active" [routerLink]="['']" class="nav-link" style="color: white !important; text-decoration: underline;">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white !important; text-decoration: underline;">
+                Technologies
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                <li>
+                  <a class="dropdown-item" href="generative-ai" style="text-decoration: underline;">
+                    <img src="assets/img/icons/blog.png" alt="generative-ai" width="20" height="20" class="me-2"> Generative AI
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="image" style="text-decoration: underline;">
+                    <img src="assets/img/icons/ebook.png" alt="image" width="20" height="20" class="me-2"> Image
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="text" style="text-decoration: underline;">
+                    <img src="assets/img/icons/im.png" alt="text" width="20" height="20" class="me-2"> Text
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="video" style="text-decoration: underline;">
+                    <img src="assets/img/icons/video-logo-7.png" alt="video" width="20" height="20" class="me-2"> Video
+                  </a>
+                </li>
+               
+              </ul>
+            </li>
+            
+             
+                <li class="nav-item">
+                  <a routerLinkActive="active" [routerLink]="['/pixvoice']" class="nav-link" style="color: white !important; text-decoration: underline;">PixVoice</a>
+                </li>
+              
+            <li class="nav-item">
+              <a routerLinkActive="active" [routerLink]="['/extractNow']" class="nav-link" style="color: white !important; text-decoration: underline;">Extract Now</a>
+            </li>
+            <li class="nav-item">
+              <a routerLinkActive="active" [routerLink]="['/ourServices']" class="nav-link" style="color: white !important; text-decoration: underline;">Our Services</a>
+            </li>
+            <li class="nav-item">
+              <a routerLinkActive="active" [routerLink]="['/contactUs']" class="nav-link" style="color: white !important; text-decoration: underline;">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-none d-lg-block @@cta_button_classes">
+          <a class="btn btn-md btn-secondary animate-up-2" style="cursor: pointer; background-color: #1e81b0 !important; border-color:#1e81b0 !important;" routerLinkActive="active" [routerLink]="['/auth']" *ngIf="!isAuthenticated">
+            <i class="ni ni-circle-08 mr-3"></i>Login
+          </a>
+        </div>
+        <div class="d-none d-lg-block @@cta_button_classes">
+          <a class="btn btn-md btn-secondary animate-up-2" style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">
+            <i class="ni ni-circle-08 mr-3"></i>Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+  

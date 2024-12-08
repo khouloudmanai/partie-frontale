@@ -1,0 +1,313 @@
+.hero {
+    width: 100%;
+    height: 85vh;
+    background-image: url("src/assets/img/OCR_Software_2021.jpg")  ;
+    background-size: cover;
+    padding: 80px 0;
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fcfdff;
+  }
+  .hero h4 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 300;
+    color: #fcfdff;
+  }
+  .hero .hero-img {
+    text-align: right;
+  }
+  @media (min-width: 1024px) {
+    .hero {
+      background-attachment: fixed;
+    }
+  }
+  @media (max-width: 991px) {
+    .hero {
+      height: auto;
+      padding: 120px 0 60px 0;
+    }
+    .hero .hero-img {
+      text-align: center;
+      margin-top: 80px;
+    }
+    .hero .hero-img img {
+      width: 80%;
+    }
+  }
+  @media (max-width: 768px) {
+    .hero {
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 32px;
+    }
+    .hero h2 {
+      font-size: 24px;
+    }
+    .hero .hero-img img {
+      width: 100%;
+    }
+  }
+
+
+  
+/* General Section Styling */
+#about {
+    padding: 60px 15px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Container Styling */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header Styling */
+  .section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Content Styling */
+  .content {
+    text-align: left;
+  }
+  
+  .content h3 {
+    font-size: 22px;
+    color: #444;
+    margin-bottom: 15px;
+  }
+  
+  .content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #666;
+  }
+  
+  .content li {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  
+  /* Button Styling */
+  .btn-read-more {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-read-more span {
+    margin-right: 8px;
+  }
+  
+  .btn-read-more i {
+    font-size: 18px;
+  }
+  
+  .btn-read-more:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+  
+  /* Image Styling */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .col-lg-6 {
+      margin-bottom: 30px;
+    }
+    
+    .content {
+      text-align: center;
+    }
+  
+    .btn-read-more {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  
+
+
+
+  /* General Section Styling */
+#about {
+    padding: 60px 15px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Container Styling */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header Styling */
+  .section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Content Styling */
+  .content {
+    text-align: left;
+  }
+  
+  .content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  .btn-read-more {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-read-more span {
+    margin-right: 8px;
+  }
+  
+  .btn-read-more i {
+    font-size: 18px;
+  }
+  
+  .btn-read-more:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+  
+  /* Image Styling */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .col-lg-6 {
+      margin-bottom: 30px;
+    }
+  
+    .content {
+      text-align: center;
+    }
+  
+    .btn-read-more {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  
+
+
+  /* General Section Styling */
+#values {
+    padding: 60px 15px;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Section Title Styling */
+  .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .section-title h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  /* Box Styling */
+  .box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .box h3 {
+    font-size: 24px;
+    color: #0056b3;
+    margin-bottom: 15px;
+  }
+  
+  .box p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .box {
+      padding: 20px;
+    }
+  
+    .section-title h2 {
+      font-size: 28px;
+    }
+  
+    .box h3 {
+      font-size: 20px;
+    }
+  
+    .box p {
+      font-size: 14px;
+    }
+  }
+  

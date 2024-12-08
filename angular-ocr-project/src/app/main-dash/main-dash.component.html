@@ -1,0 +1,132 @@
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Overall Statics</h6>
+                    
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Documents</h6>
+                    <h5 class="h3 mb-0">Extraction Per Month</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+
+                        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                            [chartType]="lineChartType" [plugins]="lineChartPlugins"
+                            class="chart-canvas chartjs-render-monitor" width="539" height="350"
+                            style="display: block; width: 539px; height: 350px;">
+                        </canvas>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Documents</h6>
+                    <h5 class="h3 mb-0"> Models Types</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                            [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend"
+                            [colors]="pieChartColors" class="chart-canvas chartjs-render-monitor"
+                            style="display: block; width: 539px; height: 350px !important;">
+                        </canvas>
+
+                    </div>
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Passports</h6>
+                    <h5 class="h3 mb-0">Genders</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper">
+                        <canvas baseChart [options]="doughnutChartOptions" [data]="doughnutChartData"
+                            [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                            [colors]="doughnutChartColors">
+
+                        </canvas>
+                    </div>
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Vitals</h6>
+                    <h5 class="h3 mb-0">Genders</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper">
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                            [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                            [chartType]="barChartType" [colors]="barChartColors">
+                        </canvas>
+                    </div>
+                    <br><br><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Archives</h6>
+                    <h5 class="h3 mb-0">Types</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas baseChart [data]="polarAreaChartData" [labels]="polarAreaChartLabels"
+                            [legend]="polarAreaLegend" [chartType]="polarAreaChartType">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="surtitle">Archives</h6>
+                    <h5 class="h3 mb-0">Creation Per Month</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas baseChart [datasets]="lineArcChartData" [labels]="lineArcChartLabels"
+                            [options]="lineArcChartOptions" [colors]="lineArcChartColors" [legend]="lineArcChartLegend"
+                            [chartType]="lineArcChartType" [plugins]="lineArcChartPlugins"
+                            class="chart-canvas chartjs-render-monitor" width="539" height="350"
+                            style="display: block; width: 539px; height: 350px;">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
